@@ -8,7 +8,7 @@ use axum::response::{IntoResponse, Redirect};
 use axum::routing::{get, post};
 use axum_macros::debug_handler;
 use sqlx::PgPool;
-use tracing::debug;
+use tracing::{debug, info};
 use tracing_subscriber::filter::EnvFilter;
 use tracing_subscriber::fmt;
 use tracing_subscriber::layer::SubscriberExt;
@@ -30,6 +30,8 @@ async fn main() {
         .await
         .expect("Failed to connect to Postgres");
 
+    info!("Connected to Postgres");
+
     let state = AppState::new(pool);
 
     let router = Router::new()
@@ -37,7 +39,7 @@ async fn main() {
         .route("/", post(create_shorten_url))
         .with_state(state);
 
-    let addr = SocketAddr::from(([127, 0, 0, 1], 3000));
+    let addr = SocketAddr::from(([0, 0, 0, 0], 3000));
     axum_server::bind(addr)
         .serve(router.into_make_service())
         .await

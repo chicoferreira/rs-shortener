@@ -1,0 +1,8 @@
+services:
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    environment:
+      - TUNNEL_TOKEN
+    command: "tunnel run"
+    depends_on:
+      - rs-shortener
