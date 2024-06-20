@@ -1,6 +1,4 @@
-use std::collections::HashMap;
 use std::net::SocketAddr;
-use std::sync::Arc;
 
 use axum::{Json, Router};
 use axum::extract::{Path, State};
@@ -8,26 +6,15 @@ use axum::http::StatusCode;
 use axum::response::{IntoResponse, Redirect};
 use axum::routing::{get, post};
 use axum_macros::debug_handler;
-use serde::{Deserialize, Serialize};
-use tokio::sync::RwLock;
 use tracing::debug;
 use tracing_subscriber::filter::EnvFilter;
 use tracing_subscriber::fmt;
 use tracing_subscriber::layer::SubscriberExt;
 use tracing_subscriber::util::SubscriberInitExt;
 
-#[derive(Deserialize, Serialize, Clone, Debug)]
-struct ShortenUrl {
-    id: String,
-    url: String,
-}
+use crate::app::{AppState, ShortenUrl};
 
-type AppState = Arc<RwLock<InnerAppState>>;
-
-#[derive(Default)]
-struct InnerAppState {
-    urls: HashMap<String, ShortenUrl>,
-}
+mod app;
 
 #[tokio::main]
 async fn main() {
