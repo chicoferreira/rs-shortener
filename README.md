@@ -1,3 +1,16 @@
+# Development
+
+For development, you will need to have the database running for the `sqlx` compile check queries to work.
+If you don't have a database running, you can run the following command:
+
+```bash
+docker compose up -d postgres
+cargo sqlx migrate run # you need to have sqlx installed (cargo install sqlx)
+```
+
+This will start a postgres database and run the migrations. You can develop as usual and run the server
+with `cargo run`.
+
 # Running
 
 ## Compose
