@@ -27,10 +27,15 @@ docker compose up -d # to run in the background
 
 ### Compose with Cloudflared
 
-Set `TUNNEL_TOKEN`
-Make sure the url in the cloudflared tunnel is set to `http://rs-shortener:3000`
+- Create a new network tunnel in cloudflare and set the `TUNNEL_TOKEN` in the `.env` (you can get this token from the
+  command they provide when you create a new tunnel)
+- Make sure the URL in the cloudflared tunnel is set to http://rs-shortener:3000
+
+After that, you can run the following commands:
 
 ```bash
 docker compose -f docker-compose.yml -f docker-compose-cloudflared.yml up
 docker compose -f docker-compose.yml -f docker-compose-cloudflared.yml up -d # to run in the background
 ```
+
+This will start the database, server and put the server behind the cloudflare tunnel.
