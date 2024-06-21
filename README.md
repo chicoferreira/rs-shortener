@@ -15,8 +15,12 @@ with `cargo run`.
 
 ## Compose
 
-You will need to run `cargo install sqlx` (if you don't have it installed) and `cargo sqlx prepare` before running the
-compose file. Make sure you have set `DATABASE_URL` in `.env` file and have the database running for this.
+To run the compose file, you will need to generate the query data for `sqlx` as the database is not running when the
+server is building. You can do this by running the following command:
+
+```bash
+cargo sqlx prepare # you need to have sqlx installed (cargo install sqlx)
+```
 
 After that, you can run the following commands (you no longer need the database running):
 
