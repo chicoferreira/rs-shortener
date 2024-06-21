@@ -5,7 +5,7 @@ If you don't have a database running, you can run the following command:
 
 ```bash
 docker compose up -d postgres
-cargo sqlx migrate run # you need to have sqlx installed (cargo install sqlx)
+cargo sqlx migrate run # you need to have sqlx-cli installed (cargo install sqlx-cli)
 ```
 
 This will start a postgres database and run the migrations. You can develop as usual and run the server
@@ -16,10 +16,13 @@ with `cargo run`.
 ## Compose
 
 To run the compose file, you will need to generate the query data for `sqlx` as the database is not running when the
-server is building. You can do this by running the following command:
+server is building inside the docker compose. This step will require the database to be running with the tables setup so
+follow the steps in the development section to get the database running.
+
+For that you can do this by running the following command:
 
 ```bash
-cargo sqlx prepare # you need to have sqlx installed (cargo install sqlx)
+cargo sqlx prepare # you need to have sqlx-cli installed (cargo install sqlx-cli)
 ```
 
 After that, you can run the following commands (you no longer need the database running):
